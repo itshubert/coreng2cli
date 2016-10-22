@@ -43,3 +43,23 @@
 		  "../node_modules/bootstrap/dist/css/bootstrap.css",
 		  "styles.css"
 		],
+
+To use jQuery in Typescript, follow the link below.
+	http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/
+		- npm install --save jquery
+		- update scripts in angular-cli.json
+			"scripts": [
+			  "../node_modules/jquery/dist/jquery.js"
+			]
+		- In typescript file
+
+			import { Component, OnInit } from '@angular/core';  
+			// import line is this one
+			declare var $:any;
+
+			export default class Random implements OnInit {  
+			  ngOnInit() {
+				// $ will be availble
+				console.log($);
+			  }
+			}
