@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
+declare var $: any;
 
 @Component({
     selector: 'app-dashboard',
@@ -41,6 +42,7 @@ export class DashboardComponent implements OnInit {
         // };
 
         this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(0, 5));
+        $("body").css('background-color', 'yellow');
     }
 
     //gotoDetail(hero: Hero): void {
