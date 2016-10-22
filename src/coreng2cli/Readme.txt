@@ -1,6 +1,8 @@
 ﻿ASP.NET Core - Angular 2 using Angular CLI
 
-- Disable typescript compilation within VS2015
+- Ensure you have the latest (2.x.x) version of Typescript VS Extension
+
+- Disable typescript compilation within VS2015 (we only want its intellisense), we let Angular CLI handle that
 	- Add the following to the first PropertyGroup
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 
@@ -17,13 +19,15 @@
 			}
 	  },
 
-- Remove everything default .NET bower
+You can skip the next four steps if you don't plan to install 3rd party libraries using Bower
+- Remove everything default .NET bower.  We don't want it installing under wwwroot/libs
 - Delete .bowerrc or change location to default "bower_components"
 - Run "bower init"
 - Install bower libraries i.e. "bower install jquery --save"
+
 - Initialise Angular 2 in project folder
 		- ng init
-- Change Angular CLI's output to "wwwroot"
+- Change Angular CLI"s output to "wwwroot"
 		"outDir": "wwwroot",
 
 - To install Bootstrap 4
@@ -53,7 +57,7 @@ To use jQuery in Typescript, follow the link below.
 			]
 		- In typescript file
 
-			import { Component, OnInit } from '@angular/core';  
+			import { Component, OnInit } from "@angular/core";  
 			// import line is this one
 			declare var $:any;
 
