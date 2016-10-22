@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     //) { }
 
     ngOnInit() {
-        this.heroes = this.heroService.getHeroes();
+        
         // this.hero = new Hero();
         // this.hero.id = 1;
         // this.hero.name = "Hubert";
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
         //   name: "Hubert"
         // };
 
-        //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(1, 5));
+        this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(0, 5));
     }
 
     //gotoDetail(hero: Hero): void {

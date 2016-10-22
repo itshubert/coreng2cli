@@ -18,10 +18,16 @@ const HEROES: Hero[] = [
 @Injectable()
 export class HeroService {
 
+    heroes: Hero[] = HEROES;
+
     constructor() { }
 
     getHeroes(): Hero[] {
         return HEROES;
-    };
+    }
+
+    getHeroesPromise(): Promise<Hero[]> {
+        return Promise.resolve(this.heroes);
+    }
 
 }
