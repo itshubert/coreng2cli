@@ -23,7 +23,7 @@
 - Install bower libraries i.e. "bower install jquery --save"
 - Initialise Angular 2 in project folder
 		- ng init
-- Change Angular CLI's output to "wwwroot"
+- Change Angular CLI"s output to "wwwroot"
 		"outDir": "wwwroot",
 
 - To install Bootstrap 4
@@ -53,7 +53,7 @@ To use jQuery in Typescript, follow the link below.
 			]
 		- In typescript file
 
-			import { Component, OnInit } from '@angular/core';  
+			import { Component, OnInit } from "@angular/core";  
 			// import line is this one
 			declare var $:any;
 
@@ -63,3 +63,17 @@ To use jQuery in Typescript, follow the link below.
 				console.log($);
 			  }
 			}
+
+
+
+    new Hero { Id = 1,  Name =  "Hubert" },
+    new Hero { Id = 11, Name =  "Mr. Nice" },
+    new Hero { Id = 12, Name =  "Narco" },
+    new Hero { Id = 13, Name =  "Bombasto" },
+    new Hero { Id = 14, Name =  "Celeritas" },
+    new Hero { Id = 15, Name =  "Magneta" },
+    new Hero { Id = 16, Name =  "RubberMan" },
+    new Hero { Id = 17, Name =  "Dynama" },
+    new Hero { Id = 18, Name =  "Dr IQ" },
+    new Hero { Id = 19, Name =  "Magma" },
+    new Hero { Id = 20, Name =  "Tornado" }
