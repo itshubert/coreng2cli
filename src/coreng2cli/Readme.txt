@@ -26,3 +26,20 @@
 - Change Angular CLI's output to "wwwroot"
 		"outDir": "wwwroot",
 
+- To install Bootstrap 4
+	- npm install bootstrap@next --save
+
+	Add scripts to angular-cli.json
+
+		"scripts": [
+		  "../node_modules/jquery/dist/jquery.js",
+		  "../node_modules/tether/dist/js/tether.js",
+		  "../node_modules/bootstrap/dist/js/bootstrap.js"
+		],
+
+	Finally add the Bootstrap CSS to the apps[0].styles array:
+
+		"styles": [
+		  "../node_modules/bootstrap/dist/css/bootstrap.css",
+		  "styles.css"
+		],
