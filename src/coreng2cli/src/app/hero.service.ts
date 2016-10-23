@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+import 'rxjs/Rx';
+
+// can't seem to get toPromise to work with .NET Web API so we use rx Observables instead
+//import 'rxjs/add/operator/toPromise';
+
 import { Hero } from './hero';
 
 const HEROES: Hero[] = [
@@ -15,19 +21,38 @@ const HEROES: Hero[] = [
     { id: 20, name: 'Tornado' }
 ];
 
+const HEROESURL = "/api/heroes";
+
 @Injectable()
 export class HeroService {
 
     heroes: Hero[] = HEROES;
 
-    constructor() { }
+    constructor(private http: Http) { }
 
-    getHeroes(): Hero[] {
-        return HEROES;
+    //getHeroes(): Hero[] {
+    //    return HEROES;
+    //}
+
+    //getHeroesPromise(): Promise<Hero[]> {
+    //    //return Promise.resolve(this.heroes);
+    //    return this.http.get(HEROESURL)
+    //        .toPromise()
+    //        .then(response => {
+    //            console.log('resonse ' + response);
+    //            return response.json().data as Hero[];
+    //        })
+    //        .catch(this.handleError);
+    //}
+
+    getHeroes() {
+        return this.http.get(HEROESURL)
+            .map(response => response.json() as Hero[]);
     }
 
-    getHeroesPromise(): Promise<Hero[]> {
-        return Promise.resolve(this.heroes);
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
     }
 
 }
