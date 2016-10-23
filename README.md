@@ -9,7 +9,7 @@ A project to learn how to integrate Angular CLI built Angular 2 project into ASP
 	- Add the following to the first PropertyGroup
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 
-#### In project.json, tell .NET not to compile anything under these folders.
+#### In project.json, stop .NET from compiling anything under these folders.
 
 	  "buildOptions": {
 			"emitEntryPoint": true,
@@ -57,7 +57,7 @@ npm install bootstrap@next --save
 		],
 
 #### To use jQuery in Typescript, follow the link below.
-http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/
+See http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/ for more details.
 ````bash
 npm install --save jquery
 ````
@@ -77,3 +77,24 @@ npm install --save jquery
 				console.log($);
 			  }
 			}
+
+#### MVC Routing to Angular
+More information can be found here http://blog.nbellocam.me/2016/03/21/routing-angular-2-asp-net-core/
+- Install Nuget package Microsoft.AspNetCore.SpaServices
+- Add spa-fallback route to Startup.cs
+````bash
+		routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+````
+
+#### Run Angular CLI build task with watch option
+````bash
+ng build --watch --dev
+````
+
+Include Angular CLI's output files in _Layout.cshtml
+```bash
+<script type="text/javascript" src="/inline.js"></script>
+<script type="text/javascript" src="/styles.bundle.js"></script>
+<script type="text/javascript" src="/scripts.bundle.js"></script>
+<script type="text/javascript" src="/main.bundle.js"></script>
+```
