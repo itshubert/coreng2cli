@@ -9,7 +9,7 @@ A project to learn how to integrate Angular CLI built Angular 2 project into ASP
 	- Add the following to the first PropertyGroup
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 
-#### In project.json, tell .NET not to compile anything under these folders.
+#### In project.json, stop .NET from compiling anything under these folders.
 
 	  "buildOptions": {
 			"emitEntryPoint": true,
@@ -77,6 +77,14 @@ npm install --save jquery
 				console.log($);
 			  }
 			}
+
+#### MVC Routing to Angular
+More information can be found here http://blog.nbellocam.me/2016/03/21/routing-angular-2-asp-net-core/
+- Install Nuget package Microsoft.AspNetCore.SpaServices
+- Add spa-fallback route to Startup.cs
+````bash
+		routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+````
 
 #### Run Angular CLI build task with watch option
 ````bash
