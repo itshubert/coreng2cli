@@ -90,3 +90,11 @@ More information can be found here http://blog.nbellocam.me/2016/03/21/routing-a
 ````bash
 ng build --watch --dev
 ````
+
+Include Angular CLI's output files in _Layout.cshtml
+```bash
+<script type="text/javascript" src="/inline.js"></script>
+<script type="text/javascript" src="/styles.bundle.js"></script>
+<script type="text/javascript" src="/scripts.bundle.js"></script>
+<script type="text/javascript" src="/main.bundle.js"></script>
+```
