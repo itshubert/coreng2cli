@@ -30,4 +30,12 @@ export class HeroDetailComponent implements OnInit {
         });
     }
 
+    save(): void {
+
+    }
+
+    goBack(): void {
+        window.history.back();
+    }
+
 }

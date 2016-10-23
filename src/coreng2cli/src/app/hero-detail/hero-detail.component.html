@@ -1,9 +1,23 @@
 <div class="row">
     <div class="col-md-4 offset-md-4 text-center">
+        <form *ngIf="hero">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="name" [(ngModel)]="hero.name" placeholder="Type name here..." />
+            </div>
+        </form>
+
         <div class="card" *ngIf="hero">
             <img class="card-img-top" src="http://placehold.it/350x150" alt="Card image cap">
             <div class="card-block">
                 <h4 class="card-title">{{hero.id}}: {{hero.name}}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-sm btn-outline-success float-md-right" (click)="save()">Save</button>
+                <button class="btn btn-sm btn-outline-secondary float-md-right" (click)="goBack()">Go back</button>
             </div>
         </div>
     </div>
