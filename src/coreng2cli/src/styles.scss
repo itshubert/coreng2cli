@@ -2,3 +2,8 @@
 .body-content {
     margin-top: 60px;
 }
+
+.list-group .list-group-item:hover {
+    cursor: pointer;
+    background-color: #f7d88e;
+}

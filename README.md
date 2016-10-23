@@ -83,7 +83,7 @@ More information can be found here http://blog.nbellocam.me/2016/03/21/routing-a
 - Install Nuget package Microsoft.AspNetCore.SpaServices
 - Add spa-fallback route to Startup.cs
 ````bash
-		routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
 ````
 
 #### Run Angular CLI build task with watch option

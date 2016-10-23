@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
     // hero: Hero;
 
     constructor(
-        private heroService: HeroService
+        private heroService: HeroService,
+        private router: Router
     ) { }
 
     //constructor(
@@ -46,9 +47,9 @@ export class DashboardComponent implements OnInit {
         $("body").css('background-color', '#efefef');
     }
 
-    //gotoDetail(hero: Hero): void {
-    //    let link = ['/detail', hero.id];
-    //    this.router.navigate(link);
-    //}
+    gotoDetail(hero: Hero): void {
+        let link = ['/detail', hero.id];
+        this.router.navigate(link);
+    }
 
 }
