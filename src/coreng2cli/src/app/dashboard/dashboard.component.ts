@@ -41,8 +41,9 @@ export class DashboardComponent implements OnInit {
         //   name: "Hubert"
         // };
 
-        this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(0, 5));
-        $("body").css('background-color', 'yellow');
+        //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(0, 5));
+        this.heroService.getHeroes().subscribe(p => this.heroes = p);
+        $("body").css('background-color', '#efefef');
     }
 
     //gotoDetail(hero: Hero): void {
