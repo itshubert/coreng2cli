@@ -9,7 +9,7 @@ declare var $: any;
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css']
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
         // };
 
         //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(0, 5));
-        this.heroService.getHeroes().subscribe(p => this.heroes = p);
+        this.heroService.getHeroes().subscribe(p => this.heroes = p.slice(0, 5));
         $("body").css('background-color', '#efefef');
     }
 
