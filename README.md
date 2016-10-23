@@ -79,12 +79,11 @@ npm install --save jquery
 			}
 
 #### MVC Routing to Angular
-Edit Startup.cs and add the route for "spa-fallback".  This basically redirects 404s to our Angular app.
+More information can be found here http://blog.nbellocam.me/2016/03/21/routing-angular-2-asp-net-core/
+- Install Nuget package Microsoft.AspNetCore.SpaServices
+- Add spa-fallback route to Startup.cs
 ````bash
-		routes.MapRoute(
-				name: "spa-fallback",
-				template: "{*url}",
-				defaults: new { controller = "Home", action = "Index" });
+		routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
 ````
 
 #### Run Angular CLI build task with watch option
