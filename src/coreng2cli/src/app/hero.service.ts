@@ -45,6 +45,11 @@ export class HeroService {
     //        .catch(this.handleError);
     //}
 
+    getHero(id: Number) {
+        return this.http.get(HEROESURL + '/' + id)
+            .map(response => response.json() as Hero);
+    }
+
     getHeroes() {
         return this.http.get(HEROESURL)
             .map(response => response.json() as Hero[]);

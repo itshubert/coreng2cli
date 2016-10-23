@@ -11,10 +11,12 @@ namespace coreng2cli.Controllers
     [Route("api/[controller]")]
     public class HeroesController : Controller
     {
-        [HttpGet]
-        public IEnumerable<Hero> GetAll()
+
+        private List<Hero> heroes;
+
+        public HeroesController()
         {
-            List<Hero> heroes = new List<Hero>()
+            this.heroes = new List<Hero>()
             {
                 new Hero { Id = 1,  Name =  "Hubert" },
                 new Hero { Id = 11, Name =  "Mr. Nice" },
@@ -28,8 +30,19 @@ namespace coreng2cli.Controllers
                 new Hero { Id = 19, Name =  "Magma" },
                 new Hero { Id = 20, Name =  "Tornado" }
             };
+        }
 
-            return heroes;
+        [HttpGet]
+        public IEnumerable<Hero> GetAll()
+        {
+            return this.heroes;
+        }
+
+        [HttpGet("{id}")]
+        
+        public IActionResult Get(int id)
+        {
+            return new ObjectResult(this.heroes.FirstOrDefault(x => x.Id == id));
         }
 
     }
