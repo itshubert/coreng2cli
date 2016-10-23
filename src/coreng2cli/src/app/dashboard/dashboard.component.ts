@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
+declare var $: any;
 
 @Component({
     selector: 'app-dashboard',
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
     //) { }
 
     ngOnInit() {
-        this.heroes = this.heroService.getHeroes();
+        
         // this.hero = new Hero();
         // this.hero.id = 1;
         // this.hero.name = "Hubert";
@@ -40,7 +41,9 @@ export class DashboardComponent implements OnInit {
         //   name: "Hubert"
         // };
 
-        //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(1, 5));
+        //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes.slice(0, 5));
+        this.heroService.getHeroes().subscribe(p => this.heroes = p);
+        $("body").css('background-color', '#efefef');
     }
 
     //gotoDetail(hero: Hero): void {
