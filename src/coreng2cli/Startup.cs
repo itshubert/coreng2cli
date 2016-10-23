@@ -55,6 +55,17 @@ namespace coreng2cli
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+
+                if (context.Response.StatusCode == 404 && !System.IO.Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/"; // Put your Angular root page here 
+                    await next();
+                }
+            });
         }
     }
 }

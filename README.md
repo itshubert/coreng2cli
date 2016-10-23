@@ -78,3 +78,7 @@ npm install --save jquery
 			  }
 			}
 
+#### Run Angular CLI build task with watch option
+````bash
+ng build --watch --dev
+````
