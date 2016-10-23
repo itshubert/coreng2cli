@@ -57,7 +57,7 @@ npm install bootstrap@next --save
 		],
 
 #### To use jQuery in Typescript, follow the link below.
-http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/
+See http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/ for more details.
 ````bash
 npm install --save jquery
 ````
@@ -77,3 +77,4 @@ npm install --save jquery
 				console.log($);
 			  }
 			}
+
