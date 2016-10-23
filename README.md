@@ -1,31 +1,71 @@
 # Coreng2cli
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.18.
+## ASP.NET Core - Angular 2 using Angular CLI
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### - Ensure you have the latest (2.x.x) version of Typescript VS Extension
 
-## Code scaffolding
+#### - Disable typescript compilation within VS2015 (we only want its intellisense), we let Angular CLI handle that
+	- Add the following to the first PropertyGroup
+		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+#### - In project.json, tell .NET not to compile anything under these folders.
 
-## Build
+	  "buildOptions": {
+			"emitEntryPoint": true,
+			"preserveCompilationContext": true,
+			"compile": {
+			  "exclude": [
+				"wwwroot",
+				"node_modules"
+			  ]
+			}
+	  },
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+#### You can skip the next four steps if you don't plan to install 3rd party libraries using Bower
+- Remove everything default .NET bower.  We don't want it installing under wwwroot/libs
+- Delete .bowerrc or change location to default "bower_components"
+- Run "bower init"
+- Install bower libraries i.e. "bower install jquery --save"
 
-## Running unit tests
+#### - Initialise Angular 2 in project folder
+		- ng init
+#### - Change Angular CLI"s output to "wwwroot"
+		"outDir": "wwwroot",
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### - To install Bootstrap 4
+	- npm install bootstrap@next --save
 
-## Running end-to-end tests
+	Add scripts to angular-cli.json
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+		"scripts": [
+		  "../node_modules/jquery/dist/jquery.js",
+		  "../node_modules/tether/dist/js/tether.js",
+		  "../node_modules/bootstrap/dist/js/bootstrap.js"
+		],
 
-## Deploying to Github Pages
+	Finally add the Bootstrap CSS to the apps[0].styles array:
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
+		"styles": [
+		  "../node_modules/bootstrap/dist/css/bootstrap.css",
+		  "styles.css"
+		],
 
-## Further help
+#### To use jQuery in Typescript, follow the link below.
+	http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/
+		- npm install --save jquery
+		- update scripts in angular-cli.json
+			"scripts": [
+			  "../node_modules/jquery/dist/jquery.js"
+			]
+		- In typescript file
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+			import { Component, OnInit } from "@angular/core";  
+			// import line is this one
+			declare var $:any;
+
+			export default class Random implements OnInit {  
+			  ngOnInit() {
+				// $ will be availble
+				console.log($);
+			  }
+			}
