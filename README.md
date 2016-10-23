@@ -1,14 +1,15 @@
 # Coreng2cli
 
 ## ASP.NET Core - Angular 2 using Angular CLI
+A project to learn how to integrate Angular CLI built Angular 2 project into ASP.NET Core MVC and Web API. 
 
-#### - Ensure you have the latest (2.x.x) version of Typescript VS Extension
+#### Ensure you have the latest (2.x.x) version of Typescript VS Extension
 
-#### - Disable typescript compilation within VS2015 (we only want its intellisense), we let Angular CLI handle that
+#### Disable typescript compilation within VS2015 (we only want its intellisense), we let Angular CLI handle that
 	- Add the following to the first PropertyGroup
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 
-#### - In project.json, tell .NET not to compile anything under these folders.
+#### In project.json, tell .NET not to compile anything under these folders.
 
 	  "buildOptions": {
 			"emitEntryPoint": true,
@@ -27,13 +28,18 @@
 - Run "bower init"
 - Install bower libraries i.e. "bower install jquery --save"
 
-#### - Initialise Angular 2 in project folder
-		- ng init
-#### - Change Angular CLI"s output to "wwwroot"
+#### Initialize Angular project inside web project folder.  Add sass option if desired.
+````bash
+ng init --style=sass
+````
+
+#### Change Angular CLI"s output to "wwwroot"
 		"outDir": "wwwroot",
 
-#### - To install Bootstrap 4
-	- npm install bootstrap@next --save
+#### To install Bootstrap 4
+````bash
+npm install bootstrap@next --save
+````
 
 	Add scripts to angular-cli.json
 
@@ -51,8 +57,10 @@
 		],
 
 #### To use jQuery in Typescript, follow the link below.
-	http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/
-		- npm install --save jquery
+http://ayoubgdah.com/blog/using-jquery-with-angular-2-angular-cli/
+````bash
+npm install --save jquery
+````
 		- update scripts in angular-cli.json
 			"scripts": [
 			  "../node_modules/jquery/dist/jquery.js"
