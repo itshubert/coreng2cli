@@ -54,18 +54,23 @@ namespace coreng2cli
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "spa-fallback",
+                    template: "{*url}",
+                    defaults: new { controller = "Home", action = "Index" });
             });
 
-            app.Use(async (context, next) =>
-            {
-                await next();
+            //app.Use(async (context, next) =>
+            //{
+            //    await next();
 
-                if (context.Response.StatusCode == 404 && !System.IO.Path.HasExtension(context.Request.Path.Value))
-                {
-                    context.Request.Path = "/"; // Put your Angular root page here 
-                    await next();
-                }
-            });
+            //    if (context.Response.StatusCode == 404 && !System.IO.Path.HasExtension(context.Request.Path.Value))
+            //    {
+            //        context.Request.Path = "/index.html"; // Put your Angular root page here 
+            //        await next();
+            //    }
+            //});
         }
     }
 }
