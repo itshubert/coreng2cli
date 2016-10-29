@@ -20,5 +20,13 @@
                 <button class="btn btn-sm btn-outline-secondary float-md-right" (click)="goBack()">Go back</button>
             </div>
         </div>
+
+        <div class="row" *ngIf="updateSuccessful">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert">
+                    <strong>{{hero.Name}}</strong> successfully updated.
+                </div>
+            </div>
+        </div>
     </div>
 </div>

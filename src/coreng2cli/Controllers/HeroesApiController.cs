@@ -74,6 +74,18 @@ namespace coreng2cli.Controllers
             return CreatedAtRoute("GetHero", new { id = hero.Id }, hero);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]Hero hero)
+        {
+            if (hero == null || hero.Id != id)
+            {
+                return BadRequest();
+            }
+
+            DbContext.Heroes.Update(hero);
+            return new NoContentResult();
+        }
+
     }
 
 }
