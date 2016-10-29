@@ -23,7 +23,7 @@ export class HeroesComponent implements OnInit {
     }
 
     onSelect(hero: Hero): void {
-        let link = ['/detail', hero.id];
+        let link = ['/detail', hero.Id];
         this.router.navigate(link);
     }
 

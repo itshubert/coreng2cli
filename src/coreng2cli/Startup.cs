@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using coreng2cli.Data;
+using Newtonsoft.Json.Serialization;
 
 namespace coreng2cli
 {
@@ -28,7 +31,12 @@ namespace coreng2cli
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                });
+            services.AddDbContext<HeroContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HeroContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

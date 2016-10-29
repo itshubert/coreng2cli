@@ -26,12 +26,17 @@ export class HeroDetailComponent implements OnInit {
             let id = +params['id'];
             console.log('id: ' + id);
             this.heroService.getHero(id)
-                .subscribe(hero => this.hero = hero);
+                .subscribe(hero => {
+                    console.log('name: ' + hero.Name);
+                    this.hero = hero;
+                });
         });
     }
 
     save(): void {
 
+        this.heroService.update(this.hero)
+            .subscribe(hero => this.hero = hero);
     }
 
     goBack(): void {
