@@ -9,8 +9,8 @@ using coreng2cli.Data;
 
 namespace coreng2cli.Controllers
 {
-    [Route("api/[controller]")]
-    public class HeroesController : Controller
+    [Route("api/heroes")]
+    public class HeroesApiController : Controller
     {
 
         
@@ -18,7 +18,7 @@ namespace coreng2cli.Controllers
 
         public HeroContext DbContext { get; set; }
 
-        public HeroesController(HeroContext heroContext)
+        public HeroesApiController(HeroContext heroContext)
         {
             DbContext = heroContext;
             //this.heroes = new List<Hero>()
@@ -44,12 +44,34 @@ namespace coreng2cli.Controllers
             return DbContext.Heroes.ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetHero")]
         
         public IActionResult Get(int id)
         {
             //return new ObjectResult(this.heroes.FirstOrDefault(x => x.Id == id));
             return new ObjectResult(DbContext.Heroes.FirstOrDefault(x => x.Id == id));
+        }
+
+        [HttpPost]
+        public IActionResult Save([FromBody]Hero hero)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (hero.Id == 0)
+            {
+                DbContext.Heroes.Add(hero);
+            }
+            else
+            {
+                DbContext.Heroes.Update(hero);
+            }
+
+            DbContext.SaveChanges();
+
+            return CreatedAtRoute("GetHero", new { id = hero.Id }, hero);
         }
 
     }

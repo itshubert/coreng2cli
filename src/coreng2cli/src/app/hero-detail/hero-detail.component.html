@@ -3,14 +3,14 @@
         <form *ngIf="hero">
             <div class="form-group">
                 <label>Name</label>
-                <input class="form-control" name="name" [(ngModel)]="hero.name" placeholder="Type name here..." />
+                <input class="form-control" name="Name" [(ngModel)]="hero.Name" placeholder="Type name here..." />
             </div>
         </form>
 
         <div class="card" *ngIf="hero">
             <img class="card-img-top" src="http://placehold.it/350x150" alt="Card image cap">
             <div class="card-block">
-                <h4 class="card-title">{{hero.id}}: {{hero.name}}</h4>
+                <h4 class="card-title">{{hero.Id}}: {{hero.Name}}</h4>
             </div>
         </div>
 
