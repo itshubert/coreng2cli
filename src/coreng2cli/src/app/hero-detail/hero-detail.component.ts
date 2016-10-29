@@ -14,6 +14,7 @@ import { Hero } from '../hero';
 export class HeroDetailComponent implements OnInit {
     @Input()
     hero: Hero;
+    updateSuccessful: boolean = false;
 
     constructor(
         private heroService: HeroService,
@@ -34,9 +35,13 @@ export class HeroDetailComponent implements OnInit {
     }
 
     save(): void {
+        this.updateSuccessful = false;
 
-        this.heroService.update(this.hero)
-            .subscribe(hero => this.hero = hero);
+        this.heroService.save(this.hero)
+            .subscribe(hero => {
+                this.hero = hero;
+                this.updateSuccessful = true;
+            });
     }
 
     goBack(): void {

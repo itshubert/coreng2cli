@@ -61,9 +61,7 @@ export class HeroService {
             .map(response => response.json() as Hero[]);
     }
 
-    update(hero: Hero) {
-        
-        
+    save(hero: Hero) {
         return this.http.post(HEROESURL, hero, { headers: this.headers })
             .map(response => response.json() as Hero);
     }
