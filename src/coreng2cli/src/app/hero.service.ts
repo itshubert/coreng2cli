@@ -74,17 +74,12 @@ export class HeroService {
 
     saveFollower(follower: Follower) {
         return this.http.post(HEROESURL + '/followers', follower, { headers: this.headers })
-            .map(response => {
-                let savedFollower: Follower = response.json() as Follower
-                console.log('follower.heroId: ' + savedFollower.HeroId);
-                //this.getFollowersByHero(savedFollower.HeroId);
-                return savedFollower;
-            });
+            .map(response => response.json() as Follower);
     }
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    }
+    //private handleError(error: any): Promise<any> {
+    //    console.error('An error occurred', error); // for demo purposes only
+    //    return Promise.reject(error.message || error);
+    //}
 
 }

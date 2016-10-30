@@ -111,7 +111,14 @@ namespace coreng2cli.Controllers
 
             DbContext.SaveChanges();
 
-            return isNew ? (IActionResult)CreatedAtRoute("GetFollower", new { id = follower.Id }, follower) : (IActionResult)new NoContentResult();
+            if (isNew)
+            {
+                return CreatedAtRoute("GetFollower", new { id = follower.Id }, follower);
+            }
+            else
+            {
+                return Ok(follower);
+            }
         }
 
         #endregion "Follower"

@@ -36,7 +36,7 @@ export class HeroDetailComponent implements OnInit {
 
                     if (this.hero) {
                         this.follower.HeroId = this.hero.Id;
-                        
+                        this.getFollowers();
                     }
                 });
         });
@@ -61,7 +61,7 @@ export class HeroDetailComponent implements OnInit {
         window.history.back();
     }
 
-    addFollower(): void {
+    saveFollower(): void {
         this.heroService.saveFollower(this.follower)
             .subscribe(follower => {
                 this.follower = {
@@ -72,6 +72,10 @@ export class HeroDetailComponent implements OnInit {
 
                 this.getFollowers();
             });
+    }
+
+    editFollower(follower: Follower): void {
+        this.follower = follower;
     }
 
 }
