@@ -44,8 +44,11 @@ namespace coreng2cli.Controllers
                 return BadRequest();
             }
 
+            bool isNew = false;
+
             if (hero.Id == 0)
             {
+                isNew = true;
                 DbContext.Heroes.Add(hero);
             }
             else
@@ -55,7 +58,7 @@ namespace coreng2cli.Controllers
 
             DbContext.SaveChanges();
 
-            return CreatedAtRoute("GetHero", new { id = hero.Id }, hero);
+            return isNew ? (IActionResult)CreatedAtRoute("GetHero", new { id = hero.Id }, hero) : (IActionResult)new NoContentResult();
         }
 
         [HttpPut("{id}")]
@@ -70,13 +73,48 @@ namespace coreng2cli.Controllers
             return new NoContentResult();
         }
 
-        [HttpGet]
-        [Route("followers/{heroId:int}")]
+        #region "Follower"
+
+        [HttpGet("followers/byhero/{heroId:int}", Name = "GetHeroFollowres")]
         public IEnumerable<Follower> GetHeroFollowers(int heroId)
         {
             return DbContext.Followers.Where(x => x.HeroId == heroId).ToList();
         }
 
+        [HttpGet("followers/{id}", Name = "GetFollower")]
+        public IActionResult GetFollower(int id)
+        {
+            return new ObjectResult(DbContext.Followers.Find(id));
+        }
+
+
+        [HttpPost]
+        [Route("followers")]
+        public IActionResult SaveFollower([FromBody] Follower follower)
+        {
+            if (follower == null)
+            {
+                return BadRequest();
+            }
+
+            bool isNew = false;
+
+            if (follower.Id == 0)
+            {
+                isNew = true;
+                DbContext.Followers.Add(follower);
+            }
+            else
+            {
+                DbContext.Followers.Update(follower);
+            }
+
+            DbContext.SaveChanges();
+
+            return isNew ? (IActionResult)CreatedAtRoute("GetFollower", new { id = follower.Id }, follower) : (IActionResult)new NoContentResult();
+        }
+
+        #endregion "Follower"
     }
 
 }

@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 //import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';
+import { Follower } from './follower';
 
 //const HEROES: Hero[] = [
 //    { id: 1, name: "Hubert" },
@@ -28,7 +29,7 @@ export class HeroService {
 
     private headers;
     //heroes: Hero[] = HEROES;
-    heroes: Hero[];
+    //heroes: Hero[];
 
     constructor(private http: Http) {
         this.headers = new Headers();
@@ -64,6 +65,21 @@ export class HeroService {
     save(hero: Hero) {
         return this.http.post(HEROESURL, hero, { headers: this.headers })
             .map(response => response.json() as Hero);
+    }
+
+    getFollowersByHero(id: Number) {
+        return this.http.get(HEROESURL + '/followers/byhero/' + id)
+            .map(response => response.json() as Follower[]);
+    }
+
+    saveFollower(follower: Follower) {
+        return this.http.post(HEROESURL + '/followers', follower, { headers: this.headers })
+            .map(response => {
+                let savedFollower: Follower = response.json() as Follower
+                console.log('follower.heroId: ' + savedFollower.HeroId);
+                //this.getFollowersByHero(savedFollower.HeroId);
+                return savedFollower;
+            });
     }
 
     private handleError(error: any): Promise<any> {
