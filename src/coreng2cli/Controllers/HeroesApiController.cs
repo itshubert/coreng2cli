@@ -13,7 +13,6 @@ namespace coreng2cli.Controllers
     public class HeroesApiController : Controller
     {
 
-        
         private List<Hero> heroes;
 
         public HeroContext DbContext { get; set; }
@@ -21,20 +20,6 @@ namespace coreng2cli.Controllers
         public HeroesApiController(HeroContext heroContext)
         {
             DbContext = heroContext;
-            //this.heroes = new List<Hero>()
-            //{
-            //    new Hero { Id = 1,  Name =  "Hubert" },
-            //    new Hero { Id = 11, Name =  "Mr. Nice" },
-            //    new Hero { Id = 12, Name =  "Narco" },
-            //    new Hero { Id = 13, Name =  "Bombasto" },
-            //    new Hero { Id = 14, Name =  "Celeritas" },
-            //    new Hero { Id = 15, Name =  "Magneta" },
-            //    new Hero { Id = 16, Name =  "RubberMan" },
-            //    new Hero { Id = 17, Name =  "Dynama" },
-            //    new Hero { Id = 18, Name =  "Dr IQ" },
-            //    new Hero { Id = 19, Name =  "Magma" },
-            //    new Hero { Id = 20, Name =  "Tornado" }
-            //};
         }
 
         [HttpGet]
@@ -45,7 +30,6 @@ namespace coreng2cli.Controllers
         }
 
         [HttpGet("{id}", Name = "GetHero")]
-        
         public IActionResult Get(int id)
         {
             //return new ObjectResult(this.heroes.FirstOrDefault(x => x.Id == id));
@@ -60,8 +44,11 @@ namespace coreng2cli.Controllers
                 return BadRequest();
             }
 
+            bool isNew = false;
+
             if (hero.Id == 0)
             {
+                isNew = true;
                 DbContext.Heroes.Add(hero);
             }
             else
@@ -71,7 +58,7 @@ namespace coreng2cli.Controllers
 
             DbContext.SaveChanges();
 
-            return CreatedAtRoute("GetHero", new { id = hero.Id }, hero);
+            return isNew ? (IActionResult)CreatedAtRoute("GetHero", new { id = hero.Id }, hero) : (IActionResult)new NoContentResult();
         }
 
         [HttpPut("{id}")]
@@ -86,6 +73,55 @@ namespace coreng2cli.Controllers
             return new NoContentResult();
         }
 
+        #region "Follower"
+
+        [HttpGet("followers/byhero/{heroId:int}", Name = "GetHeroFollowres")]
+        public IEnumerable<Follower> GetHeroFollowers(int heroId)
+        {
+            return DbContext.Followers.Where(x => x.HeroId == heroId).ToList();
+        }
+
+        [HttpGet("followers/{id}", Name = "GetFollower")]
+        public IActionResult GetFollower(int id)
+        {
+            return new ObjectResult(DbContext.Followers.Find(id));
+        }
+
+
+        [HttpPost]
+        [Route("followers")]
+        public IActionResult SaveFollower([FromBody] Follower follower)
+        {
+            if (follower == null)
+            {
+                return BadRequest();
+            }
+
+            bool isNew = false;
+
+            if (follower.Id == 0)
+            {
+                isNew = true;
+                DbContext.Followers.Add(follower);
+            }
+            else
+            {
+                DbContext.Followers.Update(follower);
+            }
+
+            DbContext.SaveChanges();
+
+            if (isNew)
+            {
+                return CreatedAtRoute("GetFollower", new { id = follower.Id }, follower);
+            }
+            else
+            {
+                return Ok(follower);
+            }
+        }
+
+        #endregion "Follower"
     }
 
 }

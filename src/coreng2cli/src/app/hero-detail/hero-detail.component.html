@@ -1,6 +1,7 @@
 <div class="row">
-    <div class="col-md-4 offset-md-4 text-center">
-        <form *ngIf="hero">
+    <div class="col-md-5 offset-md-1 text-center">
+        <h4>Hero</h4>
+        <form name="heroForm" *ngIf="hero">
             <div class="form-group">
                 <label>Name</label>
                 <input class="form-control" name="Name" [(ngModel)]="hero.Name" placeholder="Type name here..." />
@@ -8,7 +9,7 @@
         </form>
 
         <div class="card" *ngIf="hero">
-            <img class="card-img-top" src="http://placehold.it/350x150" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="http://placehold.it/600x150" alt="Card image cap">
             <div class="card-block">
                 <h4 class="card-title">{{hero.Id}}: {{hero.Name}}</h4>
             </div>
@@ -28,5 +29,22 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-5 offset-md-1 text-center">
+        <h4>Followers</h4>
+        <form name="followerForm" class="form-inline" *ngIf="hero">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="Name" [(ngModel)]="follower.Name" placeholder="Type follower name here..." />
+            </div>
+            <button class="btn btn-sm btn-outline-success" (click)="saveFollower()">{{follower.Id === 0 ? 'Add' : 'Save'}}</button>
+        </form>
+
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let follower of followers" (click)="editFollower(follower)">
+                <span class="tag tag-default tag-pill float-xs-right">{{follower.Id}}</span>
+                {{follower.Name}}
+            </li>
+        </ul>
     </div>
 </div>

@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { HeroService } from '../hero.service';
-
 import { Hero } from '../hero';
+import { Follower } from '../follower';
 
 @Component({
     selector: 'app-hero-detail',
@@ -14,7 +14,11 @@ import { Hero } from '../hero';
 export class HeroDetailComponent implements OnInit {
     @Input()
     hero: Hero;
+    follower: Follower = { Id: 0, HeroId: null, Name: null };
+    followers: Follower[];
+    
     updateSuccessful: boolean = false;
+    updateFollowerSuccessful: boolean = false;se
 
     constructor(
         private heroService: HeroService,
@@ -28,10 +32,19 @@ export class HeroDetailComponent implements OnInit {
             console.log('id: ' + id);
             this.heroService.getHero(id)
                 .subscribe(hero => {
-                    console.log('name: ' + hero.Name);
                     this.hero = hero;
+
+                    if (this.hero) {
+                        this.follower.HeroId = this.hero.Id;
+                        this.getFollowers();
+                    }
                 });
         });
+    }
+
+    getFollowers(): void {
+        this.heroService.getFollowersByHero(this.hero.Id)
+            .subscribe(followers => this.followers = followers);
     }
 
     save(): void {
@@ -46,6 +59,23 @@ export class HeroDetailComponent implements OnInit {
 
     goBack(): void {
         window.history.back();
+    }
+
+    saveFollower(): void {
+        this.heroService.saveFollower(this.follower)
+            .subscribe(follower => {
+                this.follower = {
+                    Id: 0,
+                    HeroId: this.hero.Id,
+                    Name: null
+                };
+
+                this.getFollowers();
+            });
+    }
+
+    editFollower(follower: Follower): void {
+        this.follower = follower;
     }
 
 }

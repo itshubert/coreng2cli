@@ -13,6 +13,7 @@ namespace coreng2cli.Data
         }
 
         public DbSet<Hero> Heroes { get; set; }
+        public DbSet<Follower> Followers { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +23,15 @@ namespace coreng2cli.Data
                 b.Property<string>("Name").IsRequired().HasMaxLength(300);
                 b.HasKey("Id");
                 b.ToTable("Heroes");
+            });
+
+            modelBuilder.Entity<Follower>(entity =>
+            {
+                entity.Property(e => e.Id).IsRequired();
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(300);
+                entity.HasOne(d => d.Hero).WithMany(x => x.Followers).HasForeignKey(d => d.HeroId);
+                entity.HasKey("Id");
+                entity.ToTable("Followers");
             });
 
         }
