@@ -11,7 +11,7 @@
         "assets",
         "favicon.ico"
       ],
-      "index": "index.html",
+      "index": "../Views/Shared/_Layout.cshtml",
       "main": "main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
